@@ -88,6 +88,8 @@ const RoomsSuitesHero = () => {
                 priority={index === 0}
                 className="object-cover"
               />
+              {/* Adjustable black shade - change the number (0-100) to control darkness */}
+              <div className="absolute inset-0 bg-black/40" />
             </SwiperSlide>
           ))}
         </Swiper>
