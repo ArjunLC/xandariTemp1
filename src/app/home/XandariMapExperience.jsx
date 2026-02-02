@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdLocationOn } from "react-icons/md";
-import WaveTransition from "@/components/WaveTransition";
 
 export default function InteractiveMap() {
   const locations = [
@@ -52,13 +51,18 @@ export default function InteractiveMap() {
 
   const [active, setActive] = useState(null);
 
-  // Calculate transform to center the clicked location
+  // Calculate transform to center the clicked location with bounds checking
   const getTransform = () => {
     if (!active) return { x: 0, y: 0 };
 
     // Calculate the offset needed to center the active location
-    const x = -(active.x - 50);
-    const y = -(active.y - 50);
+    // Adjusted for the larger container (150% size, offset by -25%)
+    let x = -(active.x - 50) * 0.67; // Scale down since container is larger
+    let y = -(active.y - 50) * 0.67;
+
+    // Constrain to reasonable limits to keep map visible
+    x = Math.max(Math.min(x, 15), -15);
+    y = Math.max(Math.min(y, 15), -15);
 
     return { x, y };
   };
@@ -67,7 +71,10 @@ export default function InteractiveMap() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0a0e1a]">
-      <div className="relative h-full w-full">
+      <div 
+        className="relative h-full w-full"
+        onClick={() => setActive(null)}
+      >
         {/* MAP ZOOM LAYER */}
         <motion.div
           animate={{
@@ -75,10 +82,16 @@ export default function InteractiveMap() {
             y: `${transform.y}%`,
           }}
           transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
-          className="absolute inset-0 h-full w-full"
+          className="absolute h-full w-full"
+          style={{
+            left: '-25%',
+            top: '-25%',
+            width: '150%',
+            height: '150%',
+          }}
         >
           {/* Map container with background image */}
-          <div
+          <div 
             className="relative h-full w-full bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: "url('/map2.svg')",
@@ -137,9 +150,12 @@ export default function InteractiveMap() {
 
                 {/* LOCATION PIN */}
                 <motion.button
-                  onClick={() => setActive(active?.id === loc.id ? null : loc)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActive(active?.id === loc.id ? null : loc);
+                  }}
                   animate={{
-                    scale: active?.id === loc.id ? 1 : 0.8,
+                    scale: active?.id === loc.id ? 1 : .8,
                   }}
                   transition={{ duration: 0.4 }}
                   className={`relative -translate-x-1/2 -translate-y-full transition-all ${
@@ -160,7 +176,10 @@ export default function InteractiveMap() {
           {locations.map((loc) => (
             <motion.button
               key={loc.id}
-              onClick={() => setActive(active?.id === loc.id ? null : loc)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setActive(active?.id === loc.id ? null : loc);
+              }}
               whileHover={{ x: 6, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className={`block text-left text-lg font-medium transition-all duration-300 ${

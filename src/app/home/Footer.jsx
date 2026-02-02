@@ -1,12 +1,14 @@
 import WaveTransition from "@/components/WaveTransition";
 import Image from "next/image";
 import {
-  FaYoutube,
   FaWhatsapp,
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { FiYoutube } from "react-icons/fi";
+import { SlSocialFacebook } from "react-icons/sl";
+import { SlSocialLinkedin } from "react-icons/sl";
 
 const Footer = () => {
   return (
@@ -25,7 +27,7 @@ const Footer = () => {
         </div>
 
         {/* MAIN GRID */}
-        <div className="grid gap-12 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-3 lg:grid-cols-3">
           {/* HOTELS */}
           <div>
             <h3 className="mb-6 text-lg font-semibold">Hotels</h3>
@@ -64,13 +66,24 @@ const Footer = () => {
           </div>
 
           {/* EXPERIENCES */}
-          <div>
-            <h3 className="mb-6 text-lg font-semibold">Spa</h3>
-            <ul className="space-y-4 text-sm text-gray-300">
-              <li className="border-b border-white/10 pb-2">Experiences</li>
-              <li className="border-b border-white/10 pb-2">Weddings</li>
-              <li className="border-b border-white/10 pb-2">Meetings</li>
-            </ul>
+          <div className="flex flex-col justify-between">
+            <div>
+              <h3 className="mb-6 text-lg font-semibold">Spa</h3>
+              <ul className="space-y-4 text-sm text-gray-300">
+                <li className="border-b border-white/10 pb-2">Experiences</li>
+                <li className="border-b border-white/10 pb-2">Weddings</li>
+                <li className="border-b border-white/10 pb-2">Meetings</li>
+              </ul>
+            </div>
+            <div className="flex items-end justify-start lg:justify-end">
+              <div className="flex justify-between text-xl text-white w-full h-[7rem] px-8 items-center">
+                <FiYoutube className="scale-125" />
+                <FaWhatsapp className="scale-125" />
+                <SlSocialFacebook className="scale-125" />
+                <FaInstagram className="scale-125" />
+                <SlSocialLinkedin className="scale-125" />
+              </div>
+            </div>
           </div>
 
           {/* INFO */}
@@ -85,7 +98,7 @@ const Footer = () => {
           </div>
 
           {/* SOCIAL */}
-          <div className="flex items-end justify-start lg:justify-end">
+          {/* <div className="flex items-end justify-start lg:justify-end">
             <div className="flex gap-5 text-xl text-white">
               <FaYoutube />
               <FaWhatsapp />
@@ -93,7 +106,7 @@ const Footer = () => {
               <FaInstagram />
               <FaLinkedinIn />
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* BOTTOM BAR */}
