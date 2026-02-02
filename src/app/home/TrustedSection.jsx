@@ -50,24 +50,44 @@ const TrustedSection = () => {
                 <SwiperSlide key={i}>
                   <div className="grid items-center gap-12 lg:grid-cols-2">
                     {/* CARD */}
-                    <div className="rounded-2xl bg-gradient-to-b from-[#0b1020] to-[#05070f] p-8 shadow-[0_0_40px_rgba(88,101,242,0.25)]">
-                      <div className="mb-4 text-blue-500">{item.rating}</div>
+                    <div
+                      className="
+    rounded-2xl
+    p-8
+    bg-[#06080f]
+    relative
+    overflow-hidden
+    shadow-[inset_0_0_35px_rgba(88,101,242,0.35)]
+  "
+                    >
+                      {/* Inner glow gradient */}
+                      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-[#2b36ff]/25 via-transparent to-transparent" />
 
-                      <p className="text-sm leading-relaxed text-gray-300">
-                        “{item.text}”
-                      </p>
+                      {/* Content */}
+                      <div className="relative">
+                        {/* Stars */}
+                        <div className="mb-4 text-[#5f6cff] text-sm tracking-widest">
+                          {item.rating}
+                        </div>
 
-                      <div className="mt-6">
-                        <p className="text-sm font-semibold text-white">
-                          {item.name}
+                        {/* Text */}
+                        <p className="text-[15px] leading-[1.9] text-[#c9d2ff]">
+                          “{item.text}”
                         </p>
-                        <p className="text-xs text-gray-400">{item.role}</p>
+
+                        {/* Author */}
+                        <div className="mt-6">
+                          <p className="text-sm font-semibold text-white">
+                            {item.name}
+                          </p>
+                          <p className="text-xs text-gray-400">{item.role}</p>
+                        </div>
                       </div>
                     </div>
 
                     {/* VIDEO */}
                     <div className="flex justify-center">
-                      <div className="relative h-[420px] w-[280px] overflow-hidden rounded-3xl">
+                      <div className="relative h-[420px] w-[280px] overflow-hidden">
                         <video
                           src={item.video}
                           autoPlay

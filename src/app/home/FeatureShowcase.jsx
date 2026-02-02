@@ -1,96 +1,138 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import WaveImage from "@/components/WaveImage";
+import WaveCarousel from "@/components/WaveCarousel";
+import TextCarousel from "@/components/TextCarousel";
+import { useEffect, useState } from "react";
 
 const FeatureShowcase = () => {
+  const content = [
+    {
+      title: "Beautiful and Secure Environment",
+      desc: "Discover opulent gardens, graceful gazebos, scenic arcades, picture-perfect pathways designed for your family.",
+    },
+    {
+      title: "World-Class Amenities",
+      desc: "Enjoy clubhouse facilities, swimming pools, fitness centers, and serene walkways.",
+    },
+  ];
+  const headings = [
+    "Beautiful\nand Secure\nEnvironment",
+    "Luxury Living Spaces",
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % content.length);
+    }, 3000); // change every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="relative h-auto bg-[#0c0c0c] overflow-hidden">
-      {/* MAIN FLEX WRAPPER */}
-      <div className="mx-auto max-w-[1300px] h-full py-10 flex items-center gap-24 relative">
+    <section className="relative bg-[#0c0c0c] overflow-hidden">
+      {" "}
+      <div className="mx-auto max-w-[1300px] py-10 flex gap-24">
         {/* LEFT COLUMN */}
-        <div className="flex flex-col justify-between h-full relative flex-1">
-          {/* TOP ROW (small image + heading) */}
+        <div className="flex-1 flex flex-col">
+          {/* TOP ROW */}
           <div className="flex items-start">
-            {/* Small image */}
+            {/* Small image carousel */}
             <motion.div
               initial={{ y: 60, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="relative w-[207px] h-[260px] flex-shrink-0"
+              className="w-[207px] h-[260px] pr-[50px]"
             >
-              {/* <Image
-                src="/FeatureShowcaseImage3.png"
-                fill
-                className="object-cover"
-                alt=""
-              /> */}
-              <WaveImage src="/FeatureShowcaseImage3.png" />
+              <WaveCarousel
+                height={260}
+                images={[
+                  "/FeatureShowcaseImage3.png",
+                  "/FeatureShowcaseImage1.png",
+                ]}
+              />
             </motion.div>
 
             {/* Heading */}
-            <motion.h2
-              initial={{ y: 80, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-              className="text-[80px] font-arial mx-[53px] mt-[96px] leading-[80px] font-light text-[#BFA280]"
-            >
-              Beautiful <br />
-              and Secure <br />
-              Environment
-            </motion.h2>
+            <AnimatePresence mode="wait">
+              <motion.h2
+                key={index} // 🔥 REQUIRED
+                initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -30, filter: "blur(4px)" }}
+                transition={{
+                  duration: 1,
+                  ease: "easeInOut",
+                }}
+                className="text-[80px] mt-[80px] leading-[80px] font-light text-[#BFA280]"
+              >
+                {headings[index]}
+              </motion.h2>
+            </AnimatePresence>
           </div>
-          {/* <div className="flex "> */}
-          {/* OVERLAPPING CARD */}
+
+          {/* CARD SECTION */}
           <div className="w-full mt-[250px] pb-[100px] flex justify-end">
-            <motion.div
-              initial={{ y: 120, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1.1 }}
-              className="flex flex-row-reverse w-[640px]"
-            >
-              <Image
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index} // 🔥 REQUIRED
+                initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 1, ease: "easeInOut" }}
+                className="flex flex-row-reverse w-[640px] pl-10"
+              >
+                {/* <Image
                 src="/FeatureShowcaseImage2.png"
                 width={260}
                 height={313}
                 className="object-cover w-[249px] h-[313px] -translate-x-20"
                 alt=""
-              />
+              /> */}
+                <div className="object-cover w-[249px] h-[340px] -translate-x-24">
+                  <WaveCarousel
+                    height={592}
+                    images={[
+                      "/FeatureShowcaseImage1.png",
+                      "/FeatureShowcaseImage2.png",
+                      "/FeatureShowcaseImage3.png",
+                    ]}
+                  />
+                </div>
 
-              <div className="flex flex-col">
-                <h4 className="mt-4 text-[40px] text-[#9fd3ff] text-lg z-10">
-                  Beautiful and Secure Environment
-                </h4>
+                <div>
+                  <h4 className="mt-4 text-[40px] z-20 relative text-[#9fd3ff]">
+                    {content[index].title}
+                  </h4>
 
-                <p className="mt-2 text-[15px] pr-20 text-gray-400 leading-relaxed">
-                  Discover opulent gardens, graceful gazebos, scenic arcades,
-                  picture-perfect pathways designed for your family.
-                </p>
-              </div>
-            </motion.div>
+                  <p className="mt-2 text-[15px] pr-20 text-gray-400">
+                    {content[index].desc}
+                  </p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-          {/* </div> */}
         </div>
 
         {/* RIGHT COLUMN */}
-        <div className="flex flex-1 justify-end">
+        <div className="flex-1 flex justify-end">
           <motion.div
             initial={{ y: 120, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="relative"
+            className="w-[350px] h-[592px]"
           >
-            {/* <Image
-              src="/FeatureShowcaseImage1.png"
-              width={560}
-              height={740}
-              className="object-cover w-[350px] h-[492px]"
-              alt=""
-            /> */}
-            <div className="object-cover w-[350px] h-[592px]">
-              <WaveImage src="/FeatureShowcaseImage1.png" />
-            </div>
+            <WaveCarousel
+              height={592}
+              images={[
+                "/FeatureShowcaseImage1.png",
+                "/FeatureShowcaseImage2.png",
+                "/FeatureShowcaseImage3.png",
+              ]}
+            />
           </motion.div>
         </div>
       </div>

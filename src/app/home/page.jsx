@@ -6,7 +6,6 @@ import Image from "next/image";
 import ExperienceSection from "./ExperienceSection";
 import ImageOverlayCard from "./ImageOverlayCard";
 import RoomsSuitesHero from "./RoomsSuitesHero";
-import FeatureShowcase from "./FeatureShowcase";
 import DestinationWeddingSection from "./DestinationWeddingSection";
 import TrustedSection from "./TrustedSection";
 import Footer from "./Footer";
@@ -16,6 +15,8 @@ import Luxury from "./Luxury";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WaveTransition from "@/components/WaveTransition";
+import FeatureShowcase from "./FeatureShowcase";
+import XandariMapExperience from "./XandariMapExperience";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,6 +122,7 @@ const Page = () => {
 
       <div ref={addToRefs} className="relative bg-white">
         <FeatureShowcase />
+        {/* <FeatureSlide /> */}
       </div>
 
       <div ref={addToRefs} className="relative bg-white">
@@ -129,6 +131,9 @@ const Page = () => {
 
       <div ref={addToRefs} className="relative bg-black">
         <TrustedSection />
+      </div>
+      <div ref={addToRefs} className="relative bg-black">
+        <XandariMapExperience />
       </div>
 
       <div>

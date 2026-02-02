@@ -87,7 +87,7 @@ const DestinationWeddingSection = () => {
       <div className="relative flex flex-col items-center">
         {/* ===== TOP CAROUSEL ===== */}
         <div
-          className="relative z-20 w-[60rem] cursor-none"
+          className="relative z-20 w-[993px] cursor-none"
           onMouseMove={(e) => {
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -110,21 +110,21 @@ const DestinationWeddingSection = () => {
               disableOnInteraction: false,
             }}
             loop
-            speed={1500}
+            speed={500}
             slidesPerView="auto"
             centeredSlides
           >
             {images.map((src, index) => (
               <SwiperSlide
                 key={`top-${index}`}
-                className="w-[360px] swiper-slide-active:w-[600px] transition-all duration-700"
+                className=" swiper-slide-active:w-[600px] transition-all duration-700"
               >
                 <Image
                   src={src}
                   alt="Top Carousel"
                   width={1200}
                   height={IMAGE_HEIGHT}
-                  className="h-[480px] w-full object-cover"
+                  className="h-[654px] w-full object-cover"
                 />
               </SwiperSlide>
             ))}
@@ -132,7 +132,22 @@ const DestinationWeddingSection = () => {
         </div>
 
         {/* ===== BOTTOM CAROUSEL ===== */}
-        <div className="relative z-0 -mt-[30rem] w-[70rem]">
+        <div
+          className="relative z-0 -mt-[40.9rem] w-[1248px] cursor-none"
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+
+            setCursorDir(x < rect.width / 2 ? "left" : "right");
+          }}
+          onMouseLeave={() => setCursorDir(null)}
+          onClick={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+
+            x < rect.width / 2 ? slidePrevBoth() : slideNextBoth();
+          }}
+        >
           <Swiper
             modules={[Autoplay]}
             onSwiper={(swiper) => (bottomSwiperRef.current = swiper)}
@@ -142,21 +157,21 @@ const DestinationWeddingSection = () => {
               reverseDirection: true,
             }}
             loop
-            speed={1500}
+            speed={500}
             slidesPerView="auto"
             centeredSlides
           >
             {imagess.map((src, index) => (
               <SwiperSlide
                 key={`bottom-${index}`}
-                className="w-[400px] swiper-slide-active:w-[680px] transition-all duration-700"
+                className="swiper-slide-active:w-[680px] transition-all duration-700"
               >
                 <Image
                   src={src}
                   alt="Bottom Carousel"
                   width={1200}
                   height={IMAGE_HEIGHT}
-                  className="h-[480px] w-full object-cover"
+                  className="h-[655px] w-full object-cover"
                 />
               </SwiperSlide>
             ))}
