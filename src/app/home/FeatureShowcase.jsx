@@ -49,10 +49,7 @@ const FeatureShowcase = () => {
             >
               <WaveCarousel
                 height={260}
-                images={[
-                  "/FeatureShowcaseImage3.png",
-                  "/FeatureShowcaseImage1.png",
-                ]}
+                images={["/food2.webp", "/FeatureShowcaseImage1.png"]}
               />
             </motion.div>
 
@@ -95,11 +92,7 @@ const FeatureShowcase = () => {
                 <div className="object-cover w-[249px] h-[340px] -translate-x-24">
                   <WaveCarousel
                     height={592}
-                    images={[
-                      "/FeatureShowcaseImage1.png",
-                      "/FeatureShowcaseImage2.png",
-                      "/FeatureShowcaseImage3.png",
-                    ]}
+                    images={["/FeatureShowcaseImage1.png", "/food1.webp"]}
                   />
                 </div>
 
@@ -127,11 +120,7 @@ const FeatureShowcase = () => {
           >
             <WaveCarousel
               height={592}
-              images={[
-                "/FeatureShowcaseImage1.png",
-                "/FeatureShowcaseImage2.png",
-                "/FeatureShowcaseImage3.png",
-              ]}
+              images={["/FeatureShowcaseImage1.png", "/food1.webp"]}
             />
           </motion.div>
         </div>
