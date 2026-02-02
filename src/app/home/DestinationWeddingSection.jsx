@@ -57,7 +57,7 @@ const DestinationWeddingSection = () => {
 
   return (
     <section className="bg-white pb-[67px] relative">
-      <WaveTransition height={60} top={"-49px"} flip />
+      <WaveTransition height={60} top={"-54px"} flip />
       <div>
         <h2 className=" font-bold text-[46px] text-center text-[#273880] font-arial">
           Destination Wedding & Special
