@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
@@ -26,7 +26,7 @@ const RoomsDataSet = [
     title: "Xandari Costa Rica",
   },
   {
-    images: ["/image1.png", "/RoomsImage.png", "/image1.png", "/image2.png"],
+    images: ["/image1.png", "/RoomsImage.png", "/image1.png", "/image3.png"],
     roomName: "PEARL SUITE VILLA",
     person: "4 Persons",
     count: "60 m²",
@@ -34,7 +34,7 @@ const RoomsDataSet = [
     title: "Xandari Pearl",
   },
   {
-    images: ["/RoomsImage.png", "/image1.png", "/image2.png"],
+    images: ["/image3.png", "/image1.png", "/image2.png"],
     roomName: "PEARL SUITE VILLA",
     person: "10 Persons",
     count: "56 m²",
@@ -42,7 +42,7 @@ const RoomsDataSet = [
     title: "Cardamom County",
   },
   {
-    images: ["/RoomsImage.png", "/image1.png", "/image2.png"],
+    images: ["/image1.png", "/image3.png", "/image2.png"],
     roomName: "PEARL SUITE VILLA",
     person: "5 Persons",
     count: "56 m²",
@@ -50,7 +50,7 @@ const RoomsDataSet = [
     title: "Xandari Riverscapes",
   },
   {
-    images: ["/RoomsImage.png", "/image1.png", "/image2.png"],
+    images: ["/image2.png", "/image1.png", "/image3.png"],
     roomName: "PEARL SUITE VILLA",
     person: "6 Persons",
     count: "56 m²",
@@ -61,6 +61,17 @@ const RoomsDataSet = [
 
 const RoomsSuitesHero = () => {
   const [activeRoom, setActiveRoom] = useState(rooms[0]);
+  const swiperRef = useRef(null);
+
+  const handleRoomChange = (room) => {
+    setActiveRoom(room);
+    // Restart autoplay after room change
+    setTimeout(() => {
+      if (swiperRef.current?.autoplay) {
+        swiperRef.current.autoplay.start();
+      }
+    }, 0);
+  };
 
   const currentRoom = RoomsDataSet.find((item) => item.title === activeRoom);
 
@@ -69,6 +80,7 @@ const RoomsSuitesHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Swiper
+          key={activeRoom}
           modules={[Autoplay]}
           effect="fade"
           navigation
@@ -108,7 +120,7 @@ const RoomsSuitesHero = () => {
           {rooms.map((room) => (
             <button
               key={room}
-              onClick={() => setActiveRoom(room)}
+              onClick={() => handleRoomChange(room)}
               className={`rounded-full px-5 py-3 text-left backdrop-blur-md transition ${
                 room === activeRoom
                   ? "bg-[#27388040]"

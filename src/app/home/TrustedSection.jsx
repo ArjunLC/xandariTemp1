@@ -20,7 +20,7 @@ const TrustedSection = () => {
       text: "The automation completely changed how our team works. Faster delivery and fewer errors.",
       name: "Sophia Lee",
       role: "Product Lead",
-      video: "/TrustedSectionimage.mp4",
+      video: "/resortImage.mp4",
     },
   ];
 

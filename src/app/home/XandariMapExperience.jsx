@@ -18,7 +18,7 @@ export default function InteractiveMap() {
     {
       id: "pearl",
       name: "Xandari Pearl",
-      x: 92,
+      x: 82,
       y: 28,
       image: "/image1.png",
       description: "Zanzibar",
@@ -71,10 +71,7 @@ export default function InteractiveMap() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0a0e1a]">
-      <div 
-        className="relative h-full w-full"
-        onClick={() => setActive(null)}
-      >
+      <div className="relative h-full w-full" onClick={() => setActive(null)}>
         {/* MAP ZOOM LAYER */}
         <motion.div
           animate={{
@@ -84,14 +81,14 @@ export default function InteractiveMap() {
           transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
           className="absolute h-full w-full"
           style={{
-            left: '-25%',
-            top: '-25%',
-            width: '150%',
-            height: '150%',
+            left: "-25%",
+            top: "-25%",
+            width: "150%",
+            height: "150%",
           }}
         >
           {/* Map container with background image */}
-          <div 
+          <div
             className="relative h-full w-full bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: "url('/map2.svg')",
@@ -155,7 +152,7 @@ export default function InteractiveMap() {
                     setActive(active?.id === loc.id ? null : loc);
                   }}
                   animate={{
-                    scale: active?.id === loc.id ? 1 : .8,
+                    scale: active?.id === loc.id ? 1 : 0.8,
                   }}
                   transition={{ duration: 0.4 }}
                   className={`relative -translate-x-1/2 -translate-y-full transition-all ${
