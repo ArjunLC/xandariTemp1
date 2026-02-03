@@ -82,10 +82,12 @@ const Page = () => {
         {/* Video Background */}
         <video
           src="/proxy.mp4"
+          poster="/proxy-poster.png"
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           className="absolute scale-150 inset-0 h-full w-full object-cover"
         />
 
